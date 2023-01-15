@@ -25,6 +25,7 @@ export function AddressForm(props: Props) {
     setLoading(true);
     await props.updateAddress(entry)
     setLoading(false);
+    setEditing(false);
   }
 
   function toggleEditing(e: React.MouseEvent<HTMLButtonElement>) {
