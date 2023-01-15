@@ -2,6 +2,7 @@ import React from 'react';
 import { MetaControls } from './MetaControls';
 import { Layout } from './Layout';
 import * as database from './database';
+import './App.css';
 
 /**
  * Simulates a checkout scenario where a user can provide a shipping
@@ -24,22 +25,44 @@ import * as database from './database';
  */
 export default function App() {
   const [shippingAddress, setShippingAddress] = React.useState(database.shippingAddress);
-  const [billingAddress, setBillingAddress] = React.useState(database.billingAddress)
+  const [billingAddress, setBillingAddress] = React.useState(database.shippingAddress)
+  const [showJSONDebug, setJSONDebug] = React.useState(false);
 
   return (
     <>
-      <MetaControls
-        shippingAddress={shippingAddress}
-        billingAddress={billingAddress}
-        onShippingUpdate={setShippingAddress}
-        onBillingUpdate={setBillingAddress}
-      />
-      <Layout
-        data={{
-          billingAddress: billingAddress,
-          shippingAddress,
-        }}
-      />
+      <h1 className="site-heading">eCommerce Checkout</h1>
+      <div className="main">
+        <div className="layout">
+
+          <MetaControls
+            shippingAddress={shippingAddress}
+            billingAddress={billingAddress}
+            onShippingUpdate={setShippingAddress}
+            onBillingUpdate={setBillingAddress}
+            showJSONDebug={showJSONDebug}
+            setJSONDebug={setJSONDebug}
+          />
+          <Layout
+            data={{
+              billingAddress,
+              shippingAddress,
+            }}
+          />
+        </div>
+        <div className="json-debug">
+          {showJSONDebug &&
+            <fieldset>
+              <legend>JSON</legend>
+              <pre>
+                {JSON.stringify({
+                  shippingAddress,
+                  billingAddress,
+                }, null, 2)}
+              </pre>
+            </fieldset>
+          }
+        </div>
+      </div>
     </>
   );
 }

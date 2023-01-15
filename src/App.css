@@ -1,14 +1,22 @@
-body {
-  height: 100vh;
+.main {
   margin: 0;
-  display: grid;
-  place-items: center;
+  background-color: '#FCF7ED';
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-fieldset {
-  padding: 0.2rem 0.4rem 0.4rem 0.6rem;
-  min-width: 400px;
-  border: 1px solid #808080;
+.site-heading {
+  font-size: 1.2rem;
+}
+
+.layout {
+  width: 450px;
+}
+
+.json-debug {
+  text-align: start;
+  width: 450px;
 }
 
 legend {
@@ -33,8 +41,4 @@ select {
 
 .text-input {
   margin-bottom: 0.4rem;
-}
-
-.meta-legend {
-  font-style: italic;
 }

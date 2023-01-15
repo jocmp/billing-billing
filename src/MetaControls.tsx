@@ -9,6 +9,8 @@ interface Props {
   billingAddress: Address;
   onShippingUpdate: (address: Address) => void;
   onBillingUpdate: (address: Address) => void;
+  showJSONDebug: boolean;
+  setJSONDebug: (showJSONDebug: boolean) => void;
 }
 
 /**
@@ -19,6 +21,8 @@ export function MetaControls({
   billingAddress,
   onBillingUpdate,
   onShippingUpdate,
+  showJSONDebug,
+  setJSONDebug
 }: Props) {
   const isPrefilledBillingEqualToShipping = isShippingEqualToBilling(
     shippingAddress,
@@ -44,34 +48,51 @@ export function MetaControls({
   }
 
   function toggleBillingPrefilled() {
-    const nextInitialBillingAddress =
-      isPrefilledBillingEqualToShipping ?
-        database.billingAddress :
-        shippingAddress;
+    if (isPrefilledBillingEqualToShipping) {
+      onBillingUpdate(database.billingAddress);
+    } else {
+      onBillingUpdate(shippingAddress);
+    }
+  }
 
-    onBillingUpdate(nextInitialBillingAddress);
+  function toggleJSONDebug() {
+    setJSONDebug(!showJSONDebug);
   }
 
   return (
-    <div>
+    <div className="meta-controls">
       <fieldset>
         <legend className="meta-legend">Meta controls 🪬</legend>
-        <input
-          type="checkbox"
-          id="shipping-default"
-          name="shipping-default"
-          onChange={toggleShippingDefault}
-          checked={!isEmpty(shippingAddress)}
-        />
-        <label htmlFor="shipping-default">Prefill shipping address</label>
-        <input
-          type="checkbox"
-          id="billing-prefilled"
-          name="billing-prefilled"
-          onChange={toggleBillingPrefilled}
-          checked={!isPrefilledBillingEqualToShipping}
-        />
-        <label htmlFor="billing-prefilled">Prefill billing address</label>
+        <div>
+          <input
+            type="checkbox"
+            id="shipping-default"
+            name="shipping-default"
+            onChange={toggleShippingDefault}
+            checked={!isEmpty(shippingAddress)}
+          />
+          <label htmlFor="shipping-default">Prefill shipping address</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="billing-prefilled"
+            name="billing-prefilled"
+            onChange={toggleBillingPrefilled}
+            checked={!isPrefilledBillingEqualToShipping}
+          />
+          <label htmlFor="billing-prefilled">Prefill billing address</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="json-debug"
+            name="json-debug"
+            onChange={toggleJSONDebug}
+            checked={showJSONDebug}
+          />
+          <label htmlFor="json-debug">Show JSON values</label>
+        </div>
       </fieldset>
     </div>
   )
