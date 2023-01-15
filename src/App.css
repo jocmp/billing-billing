@@ -1,9 +1,26 @@
+legend {
+  padding: 0 0.2rem;
+}
+
+label {
+  margin-right: 0.4rem;
+}
+
+input[type=checkbox] {
+  margin-right: 0.4rem;
+  margin-left: 0rem;
+}
+
+select {
+  padding: 0.1rem 0.4rem;
+}
+
 .main {
   margin: 0;
   background-color: '#FCF7ED';
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.8rem;
 }
 
 .layout {
@@ -19,26 +36,15 @@
   margin-top: 0.2rem;
 }
 
-legend {
-  padding: 0 0.2rem;
-}
-
-label {
-  margin-right: 0.4rem;
-}
-
-input[type=checkbox] {
-  margin-right: 0.4rem;
-}
-
 .selector {
-  margin-bottom: 0.4rem;
-}
-
-select {
-  padding: 0 0.2rem;
+  margin: 0.4rem 0;
 }
 
 .text-input {
   margin-bottom: 0.4rem;
+}
+
+.address-editor-actions {
+  display: flex;
+  gap: 0.4rem;
 }

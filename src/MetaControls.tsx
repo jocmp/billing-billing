@@ -70,22 +70,22 @@ export function MetaControls({
         <div>
           <input
             type="checkbox"
-            id="shipping-default"
-            name="shipping-default"
+            id="shipping-complete"
+            name="shipping-complete"
             onChange={toggleShippingDefault}
             checked={shippingAddress.isComplete}
           />
-          <label htmlFor="shipping-default">Prefill shipping address</label>
+          <label htmlFor="shipping-complete">Complete shipping address</label>
         </div>
         <div>
           <input
             type="checkbox"
-            id="billing-prefilled"
-            name="billing-prefilled"
+            id="billing-complete"
+            name="billing-complete"
             onChange={toggleBillingPrefilled}
             checked={billingAddress.isComplete && !isBillingSameAsShipping}
           />
-          <label htmlFor="billing-prefilled">Prefill billing address</label>
+          <label htmlFor="billing-complete">Complete billing address</label>
         </div>
         <div>
           <input

@@ -41,22 +41,24 @@ export function AddressForm(props: Props) {
           address={props.address}
           onSubmit={updateAddress}
         />
-        <button
-          form={formID}
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Please wait..." : "Save"}
-        </button>
-        {props.address.isComplete &&
+        <div className="address-editor-actions">
           <button
-            type="button"
+            form={formID}
+            type="submit"
             disabled={loading}
-            onClick={toggleEditing}
           >
-            Cancel
+            {loading ? "Please wait..." : "Save"}
           </button>
-        }
+          {props.address.isComplete &&
+            <button
+              type="button"
+              disabled={loading}
+              onClick={toggleEditing}
+            >
+              Cancel
+            </button>
+          }
+        </div>
       </>
     );
   }
