@@ -28,7 +28,7 @@ export function buildApiClient(
 ): APIClient {
   /**
    * Updates the billing address in addition to the shipping address if
-   * the billing address is empty
+   * the billing address is not set
    */
   function updateShippingAddress(entry: AddressEntry) {
     callbacks.setShippingAddress(completedEntry(entry));
@@ -59,7 +59,7 @@ async function apiCall(callback: () => void) {
   return new Promise((resolve) => setTimeout(() => {
     callback();
     resolve(null);
-  }, generateTimeoutMs()));
+  }, jitterResponseTime()));
 }
 
 function completedEntry(entry: AddressEntry): Address {
@@ -69,6 +69,6 @@ function completedEntry(entry: AddressEntry): Address {
   }
 }
 
-function generateTimeoutMs() {
+function jitterResponseTime() {
   return Math.floor(Math.random() * 3) * 1000 + 1_000;
 }
