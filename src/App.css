@@ -1,3 +1,7 @@
+body {
+  background-color: #FCF7ED;
+}
+
 legend {
   padding: 0 0.2rem;
 }
@@ -17,7 +21,6 @@ select {
 
 .main {
   margin: 0;
-  background-color: '#FCF7ED';
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
