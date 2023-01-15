@@ -1,4 +1,5 @@
 import { compact } from "lodash";
+import { countries } from "./database";
 import { Address } from "./types";
 
 interface Props {
@@ -18,7 +19,7 @@ export function AddressSummary({ address }: Props) {
       {address.streetAddress}<br />
       {address.extendedAddress}
       {localityLine}<br />
-      {address.countryCode}
+      {countries[address.countryCode]}
     </address>
   );
 }

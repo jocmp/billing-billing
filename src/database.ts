@@ -75,7 +75,7 @@ export const usAdminAreas = {
   WY: "Wyoming"
 };
 
-export const countries = {
+export const countries: Record<string, string> = {
   US: 'United States',
   CA: 'Canada',
   GB: 'United Kingdom',
