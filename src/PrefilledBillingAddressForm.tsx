@@ -1,8 +1,8 @@
 import React from "react";
-import { AddressEditor } from "./AddressEditor";
 import { AddressSummary } from "./AddressSummary";
-import { emptyAddressEntry } from "./emptyAddress";
-import { Address, AddressEntry } from "./types";
+import { BillingAddressForm } from "./BillingAddressForm";
+import { emptyAddress } from "./emptyAddress";
+import { Address } from "./types";
 
 interface Props {
   billingAddress: Address;
@@ -10,15 +10,16 @@ interface Props {
 
 export function PrefilledBillingAddressForm(props: Props) {
   const [isEditing, setEditing] = React.useState(false);
-  const [, setBillingAddress] = React.useState<AddressEntry>(
-    props.billingAddress
-  );
+  const [billingAddress, setBillingAddress] = React.useState({
+    ...props.billingAddress,
+    isComplete: false,
+  });
 
   function toggleEditing() {
     if (isEditing) {
       setBillingAddress(props.billingAddress);
     } else {
-      setBillingAddress(emptyAddressEntry)
+      setBillingAddress(emptyAddress);
     }
     setEditing(!isEditing);
   }
@@ -35,7 +36,7 @@ export function PrefilledBillingAddressForm(props: Props) {
       <label htmlFor="billing-as-shipping">Same as shipping address</label>
       {
         isEditing
-          ? <AddressEditor />
+          ? <BillingAddressForm address={billingAddress} />
           : <AddressSummary address={props.billingAddress} />
       }
     </>

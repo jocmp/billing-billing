@@ -1,7 +1,8 @@
 import { compare } from "./addressComparator";
 import { PrefilledBillingAddressForm } from "./PrefilledBillingAddressForm";
-import { AddressForm } from "./AddressForm";
 import { Address } from "./types";
+import { ShippingAddressForm } from "./ShippingAddressForm";
+import { BillingAddressForm } from "./BillingAddressForm";
 
 interface Props {
   data: {
@@ -21,18 +22,18 @@ export function Layout(props: Props) {
     <div>
       <fieldset>
         <legend>Shipping Address</legend>
-        <AddressForm address={shippingAddress} />
+        <ShippingAddressForm
+          address={shippingAddress}
+        />
       </fieldset>
       <fieldset>
         <legend>Billing Address</legend>
         {
           isBillingSameAsShipping
             ? <PrefilledBillingAddressForm billingAddress={billingAddress} />
-            : <AddressForm address={billingAddress} />
+            : <BillingAddressForm address={billingAddress} />
         }
       </fieldset>
     </div>
   );
 }
-
-// if shipping is not complete and billing is not complete

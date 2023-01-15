@@ -1,5 +1,7 @@
+import { Address } from "./types";
+
 /** Address null object */
-export const emptyAddress = {
+export const emptyAddress: Address = {
   contactName: '',
   streetAddress: '',
   extendedAddress: '',
@@ -8,14 +10,4 @@ export const emptyAddress = {
   postalCode: '',
   countryCode: '',
   isComplete: false,
-};
-
-export const emptyAddressEntry = {
-  contactName: '',
-  streetAddress: '',
-  extendedAddress: '',
-  locality: '',
-  administrativeAreaCode: '',
-  postalCode: '',
-  countryCode: ''
 };

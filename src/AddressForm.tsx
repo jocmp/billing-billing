@@ -1,10 +1,11 @@
 import React from "react";
 import { AddressEditor } from "./AddressEditor";
 import { AddressSummary } from "./AddressSummary";
-import { Address } from "./types";
+import { Address, AddressEntry } from "./types";
 
 interface Props {
   address: Address;
+  updateAddress: (addressEntry: AddressEntry) => Promise<void>;
 }
 
 /**
@@ -15,23 +16,43 @@ interface Props {
  * to fallback to a second address like the "billing as shipping"
  * option.
  */
-export function AddressForm({ address }: Props) {
+export function AddressForm(props: Props) {
   const [isEditing, setEditing] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const formID = React.useMemo(() => crypto.randomUUID(), []);
 
-  if (!address.isComplete || isEditing) {
+  async function updateAddress(entry: AddressEntry) {
+    setLoading(true);
+    await props.updateAddress(entry)
+    setLoading(false);
+  }
+
+  function toggleEditing(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
+    setEditing(!isEditing);
+  }
+
+  if (!props.address.isComplete || isEditing) {
     return (
       <>
-        <AddressEditor />
+        <AddressEditor
+          formID={formID}
+          address={props.address}
+          onSubmit={updateAddress}
+        />
         <button
-          type="button"
-          onClick={() => alert('Saved address')}
+          form={formID}
+          type="submit"
+          disabled={loading}
         >
-          Save
+          {loading ? "Please wait..." : "Save"}
         </button>
-        {address.isComplete &&
+        {props.address.isComplete &&
           <button
             type="button"
-            onClick={() => setEditing(false)}
+            disabled={loading}
+            onClick={toggleEditing}
           >
             Cancel
           </button>
@@ -42,11 +63,11 @@ export function AddressForm({ address }: Props) {
 
   return (
     <>
-      <AddressSummary address={address} />
-      {address.isComplete &&
+      <AddressSummary address={props.address} />
+      {props.address.isComplete &&
         <button
           type="button"
-          onClick={() => setEditing(true)}
+          onClick={toggleEditing}
         >
           Edit
         </button>

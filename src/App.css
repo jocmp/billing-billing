@@ -10,9 +10,13 @@
   width: 450px;
 }
 
-.json-debug {
+.database-debug {
   text-align: start;
   width: 450px;
+}
+
+.reset-button {
+  margin-top: 0.2rem;
 }
 
 legend {

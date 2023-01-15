@@ -1,4 +1,3 @@
-import { isEmpty } from "lodash";
 import { compare } from "./addressComparator";
 import { Address } from "./types";
 import * as database from './database';
@@ -9,8 +8,8 @@ interface Props {
   billingAddress: Address;
   onShippingUpdate: (address: Address) => void;
   onBillingUpdate: (address: Address) => void;
-  showJSONDebug: boolean;
-  setJSONDebug: (showJSONDebug: boolean) => void;
+  showDatabaseDebug: boolean;
+  setDatabaseDebug: (showDatabaseDebug: boolean) => void;
 }
 
 /**
@@ -21,8 +20,8 @@ export function MetaControls({
   billingAddress,
   onBillingUpdate,
   onShippingUpdate,
-  showJSONDebug,
-  setJSONDebug
+  showDatabaseDebug,
+  setDatabaseDebug
 }: Props) {
   const isBillingSameAsShipping = compare(
     shippingAddress,
@@ -56,7 +55,12 @@ export function MetaControls({
   }
 
   function toggleJSONDebug() {
-    setJSONDebug(!showJSONDebug);
+    setDatabaseDebug(!showDatabaseDebug);
+  }
+
+  function resetAddresses() {
+    onShippingUpdate(emptyAddress);
+    onBillingUpdate(emptyAddress);
   }
 
   return (
@@ -79,19 +83,28 @@ export function MetaControls({
             id="billing-prefilled"
             name="billing-prefilled"
             onChange={toggleBillingPrefilled}
-            checked={!isBillingSameAsShipping}
+            checked={billingAddress.isComplete && !isBillingSameAsShipping}
           />
           <label htmlFor="billing-prefilled">Prefill billing address</label>
         </div>
         <div>
           <input
             type="checkbox"
-            id="json-debug"
-            name="json-debug"
+            id="database-debug"
+            name="database-debug"
             onChange={toggleJSONDebug}
-            checked={showJSONDebug}
+            checked={showDatabaseDebug}
           />
-          <label htmlFor="json-debug">Show JSON values</label>
+          <label htmlFor="database-debug">Show Database</label>
+        </div>
+        <div>
+          <button
+            className="reset-button"
+            type="button"
+            onClick={resetAddresses}
+          >
+            Reset Addresses
+          </button>
         </div>
       </fieldset>
     </div>
