@@ -21,8 +21,26 @@ export function AddressEditor(props: Props) {
       setAddress({
         ...address,
         [field]: e.target.value,
-      })
+      });
     }
+  }
+
+  function updateCountryCode(e: React.ChangeEvent<HTMLSelectElement>) {
+    const nextCountryCode = e.target.value;
+
+    function adminAreaOrDefault() {
+      if (nextCountryCode !== 'US') {
+        return '';
+      }
+
+      return address.administrativeAreaCode;
+    }
+
+    setAddress({
+      ...address,
+      countryCode: nextCountryCode,
+      administrativeAreaCode: adminAreaOrDefault(),
+    });
   }
 
   function onSubmit(e: React.ChangeEvent<HTMLFormElement>) {
@@ -42,7 +60,7 @@ export function AddressEditor(props: Props) {
         name="country-code"
         value={address.countryCode}
         required
-        onChange={updateField('countryCode')}
+        onChange={updateCountryCode}
       >
         {map(countries, (name, key) => (
           <option key={key} value={key}>{name}</option>
