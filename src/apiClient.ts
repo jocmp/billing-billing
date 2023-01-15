@@ -69,6 +69,9 @@ function completedEntry(entry: AddressEntry): Address {
   }
 }
 
+/**
+ * Mimic an API response that takes between 1 to 3 seconds.
+ */
 function jitterResponseTime() {
-  return Math.floor(Math.random() * 3) * 1000 + 1_000;
+  return Math.floor(Math.random() * 2) * 1_000 + 1_000;
 }
