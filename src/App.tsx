@@ -1,7 +1,6 @@
 import React from 'react';
 import { MetaControls } from './MetaControls';
 import { Layout } from './Layout';
-import * as database from './database';
 import './App.css';
 import { APIClientContext, buildApiClient } from './apiClient';
 import { emptyAddress } from './emptyAddress';
