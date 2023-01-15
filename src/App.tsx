@@ -30,7 +30,6 @@ export default function App() {
 
   return (
     <>
-      <h1 className="site-heading">eCommerce Checkout</h1>
       <div className="main">
         <div className="layout">
 

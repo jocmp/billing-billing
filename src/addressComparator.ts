@@ -1,9 +1,9 @@
 import { isEqual, pick } from "lodash";
 import { Address } from "./types";
 
-export function isShippingEqualToBilling(shippingAddress: Address, billingAddress: Address) {
-  const shippingFields = pick(shippingAddress, comparedFields);
-  const billingFields = pick(billingAddress, comparedFields);
+export function compare(firstAddress: Address, secondAddress: Address) {
+  const shippingFields = pick(firstAddress, comparedFields);
+  const billingFields = pick(secondAddress, comparedFields);
 
   return isEqual(shippingFields, billingFields);
 }

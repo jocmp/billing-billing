@@ -1,5 +1,5 @@
 import { isEmpty } from "lodash";
-import { isShippingEqualToBilling } from "./addressComparator";
+import { compare } from "./addressComparator";
 import { Address } from "./types";
 import * as database from './database';
 import { emptyAddress } from "./emptyAddress";
@@ -24,23 +24,23 @@ export function MetaControls({
   showJSONDebug,
   setJSONDebug
 }: Props) {
-  const isPrefilledBillingEqualToShipping = isShippingEqualToBilling(
+  const isBillingSameAsShipping = compare(
     shippingAddress,
     billingAddress
   );
 
   function toggleShippingDefault() {
     const nextShippingAddress =
-      isEmpty(shippingAddress) ?
+      !shippingAddress.isComplete ?
         database.shippingAddress :
         emptyAddress;
 
     onShippingUpdate(nextShippingAddress);
 
     const canUpdateBillingAddress =
-      isPrefilledBillingEqualToShipping ||
-      isShippingEqualToBilling(nextShippingAddress, billingAddress) ||
-      isEmpty(billingAddress);
+      isBillingSameAsShipping ||
+      compare(nextShippingAddress, billingAddress) ||
+      !billingAddress.isComplete;
 
     if (canUpdateBillingAddress) {
       onBillingUpdate(nextShippingAddress);
@@ -48,7 +48,7 @@ export function MetaControls({
   }
 
   function toggleBillingPrefilled() {
-    if (isPrefilledBillingEqualToShipping) {
+    if (isBillingSameAsShipping) {
       onBillingUpdate(database.billingAddress);
     } else {
       onBillingUpdate(shippingAddress);
@@ -69,7 +69,7 @@ export function MetaControls({
             id="shipping-default"
             name="shipping-default"
             onChange={toggleShippingDefault}
-            checked={!isEmpty(shippingAddress)}
+            checked={shippingAddress.isComplete}
           />
           <label htmlFor="shipping-default">Prefill shipping address</label>
         </div>
@@ -79,7 +79,7 @@ export function MetaControls({
             id="billing-prefilled"
             name="billing-prefilled"
             onChange={toggleBillingPrefilled}
-            checked={!isPrefilledBillingEqualToShipping}
+            checked={!isBillingSameAsShipping}
           />
           <label htmlFor="billing-prefilled">Prefill billing address</label>
         </div>

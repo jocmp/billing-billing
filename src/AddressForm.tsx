@@ -5,20 +5,30 @@ import { Address } from "./types";
 
 interface Props {
   address: Address;
-  showButtons: boolean;
 }
 
-export function BillingAddressForm({
-  address,
-  showButtons
-}: Props) {
+/**
+ * Example shipping address form.
+ *
+ * Internal logic to show or display a shipping address is slightly different
+ * than the billing address since it does not have the ability
+ * to fallback to a second address like the "billing as shipping"
+ * option.
+ */
+export function AddressForm({ address }: Props) {
   const [isEditing, setEditing] = React.useState(false);
 
   if (!address.isComplete || isEditing) {
     return (
       <>
         <AddressEditor />
-        {showButtons &&
+        <button
+          type="button"
+          onClick={() => alert('Saved address')}
+        >
+          Save
+        </button>
+        {address.isComplete &&
           <button
             type="button"
             onClick={() => setEditing(false)}
@@ -33,7 +43,7 @@ export function BillingAddressForm({
   return (
     <>
       <AddressSummary address={address} />
-      {showButtons &&
+      {address.isComplete &&
         <button
           type="button"
           onClick={() => setEditing(true)}

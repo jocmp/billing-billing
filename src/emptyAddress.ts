@@ -9,3 +9,13 @@ export const emptyAddress = {
   countryCode: '',
   isComplete: false,
 };
+
+export const emptyAddressEntry = {
+  contactName: '',
+  streetAddress: '',
+  extendedAddress: '',
+  locality: '',
+  administrativeAreaCode: '',
+  postalCode: '',
+  countryCode: ''
+};
