@@ -2,13 +2,13 @@
 
 Simulates a checkout scenario where a user can provide a shipping address and a billing address in separate forms.
 
-Try out the demo on [Codesandbox](https://codesandbox.io/p/github/jocmp/billing-billing/gifted-framework?file=%2FREADME.md)
+Try out the demo on [Codesandbox](https://codesandbox.io/p/github/jocmp/billing-billing/main?file=%2FREADME.md)
 
 There are four main scenarios this application supports:
 
 1. Both forms are incomplete
    - Both shipping and billing forms display the editor
-2. Both forms are complete and are match
+2. Both forms are complete and match
    - Billing is prefilled with shipping, "same as shipping" button is shown.
    - Both shipping and billing forms display summary
 3. Both forms are complete and don't match
