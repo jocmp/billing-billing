@@ -1,5 +1,5 @@
-import { isEmpty } from "lodash";
 import React from "react";
+import { isEmptyAddress } from "./addressComparator";
 import { Address, AddressEntry } from "./types"
 
 export type Action = "billing" | "shipping";
@@ -33,7 +33,7 @@ export function buildApiClient(
   function updateShippingAddress(entry: AddressEntry) {
     callbacks.setShippingAddress(completedEntry(entry));
 
-    if (isEmpty(billingAddress)) {
+    if (isEmptyAddress(billingAddress)) {
       callbacks.setBillingAddress(completedEntry(entry));
     }
   }

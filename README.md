@@ -2,7 +2,24 @@
 
 Simulates a checkout scenario where a user can provide a shipping address and a billing address in separate forms.
 
-Try out the demo on [Codesandbox](https://codesandbox.io/p/github/jocmp/billing-billing/main?file=%2FREADME.md)
+## Getting Started
+
+Try out the demo on [CodeSandbox](https://codesandbox.io/p/github/jocmp/billing-billing/main?file=%2FREADME.md)
+
+Or run it locally:
+
+1. Clone this repo
+2. Install the dependencies
+   ```
+   npm install
+   ```
+3. Run the server
+   ```
+   npm run start
+   ```
+4. Open your browser and navigate to http://localhost:3000
+
+## Inner Workings
 
 There are four main scenarios this application supports:
 
